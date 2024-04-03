@@ -30,11 +30,11 @@
                     <i class="fas fa-address-card"></i>
                 </h4>
                 <ContactCard :contact="activeContact" />
+
                 <router-link :to="{
-                name: 'contact.edit',
-                params: { id: activeContact._id },
-                }"
-            >
+                    name: 'contact.edit',
+                    params: { id: activeContact._id },
+                }">
                     <span class="mt-2 badge badge-warning">
                         <i class="fas fa-edit"></i> Hiệu chỉnh</span>
                 </router-link>
@@ -42,6 +42,7 @@
         </div>
     </div>
 </template>
+
 <script>
 import ContactCard from "@/components/ContactCard.vue";
 import InputSearch from "@/components/InputSearch.vue";
@@ -52,7 +53,7 @@ export default {
         ContactCard,
         InputSearch,
         ContactList,
-    },
+    },// Đoạn mã xử lý đầy đủ sẽ trình bày bên dưới
     data() {
         return {
             contacts: [],
@@ -79,12 +80,10 @@ export default {
         filteredContacts() {
             if (!this.searchText) return this.contacts;
             return this.contacts.filter((_contact, index) =>
-                this.contactStrings[index].includes(this.searchText)
-            );
+                this.contactStrings[index].includes(this.searchText));
         },
         activeContact() {
-            if (this.activeIndex < 0) return null;
-            return this.filteredContacts[this.activeIndex];
+            return this.activeIndex < 0 ? null : this.filteredContacts[this.activeIndex];
         },
         filteredContactsCount() {
             return this.filteredContacts.length;
@@ -121,9 +120,11 @@ export default {
     },
 };
 </script>
+
 <style scoped>
 .page {
     text-align: left;
     max-width: 750px;
 }
+
 </style>
